@@ -1,0 +1,53 @@
+body {
+  background-image: url(https://www.publicdomainpictures.net/pictures/310000/velka/abstract-squares-pattern-background-157052513466g.jpg)
+}
+
+.box {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 1px solid black;
+  margin-left: -1px;
+  margin-bottom: -1px;
+}
+
+.off {
+  background-color: peru;
+}
+
+.on {
+  background-color: dodgerblue;
+}
+
+.box:hover {
+  background: rgb(0, 204, 255);
+}
+
+.center {
+  margin: auto;
+  display: table;
+  margin-top: 10px;
+}
+
+.grid {
+  width: 150px;
+  line-height: 0;
+  margin: auto;
+  box-shadow: 0px 0px 20px white;
+  margin-top: 20px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: red;
+  margin: auto;
+  text-align: center;
+  width: 50%;
+  margin-top: 10px;
+}
+
+h4 {
+  margin-top: 0px;
+}
