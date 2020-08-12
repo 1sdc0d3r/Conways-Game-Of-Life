@@ -1,5 +1,6 @@
 body {
-  background-image: url(https://www.publicdomainpictures.net/pictures/310000/velka/abstract-squares-pattern-background-157052513466g.jpg)
+  /* background-image: url(https://www.publicdomainpictures.net/pictures/310000/velka/abstract-squares-pattern-background-157052513466g.jpg) */
+  background: black;
 }
 
 .box {
@@ -12,11 +13,13 @@ body {
 }
 
 .off {
-  background-color: peru;
+  /* background-color: peru; */
+  background-color: black;
 }
 
 .on {
-  background-color: dodgerblue;
+  /* background-color: dodgerblue; */
+  background-color: white;
 }
 
 .box:hover {
@@ -24,18 +27,32 @@ body {
 }
 
 .center {
-  margin: auto;
-  display: table;
-  margin-top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 40%;
+  margin: 10px auto 20px;
+
+}
+
+.btn {
+  color: black;
+  margin: 0 .25em;
+  border-radius: .5em;
+}
+
+.btn:hover {
+  background-color: red;
 }
 
 .grid {
-  width: 150px;
+  width: 100vw;
+  height: 75vh;
   line-height: 0;
-  margin: auto;
-  box-shadow: 0px 0px 20px white;
-  margin-top: 20px;
+  margin: 1em auto;
+  /* box-shadow: 0px 0px 20px white; */
 }
+
+
 
 h1,
 h2,

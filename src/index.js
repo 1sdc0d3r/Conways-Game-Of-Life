@@ -47,27 +47,49 @@ class Grid extends Component {
 
 export default class Buttons extends Component {
   render() {
-    const { playButton, pauseButton, slower, faster, clear, seed } = this.props;
+    const {
+      playButton,
+      pauseButton,
+      slower,
+      faster,
+      clear,
+      seed,
+      playing,
+      setSpeed,
+    } = this.props;
+
     return (
       <div className="center">
         <ButtonToolbar>
-          <button className="btn btn-default" onClick={playButton}>
-            Play
-          </button>
-          <button className="btn btn-default" onClick={pauseButton}>
-            Pause
-          </button>
-          <button className="btn btn-default" onClick={slower}>
+          {!playing ? (
+            <>
+              <button className="btn btn-default" onClick={playButton}>
+                Play
+              </button>
+              <button className="btn btn-default" onClick={seed}>
+                Seed
+              </button>
+            </>
+          ) : (
+            <button className="btn btn-default" onClick={pauseButton}>
+              Pause
+            </button>
+          )}
+          {/* <button className="btn btn-default" onClick={slower}>
             Slower
-          </button>
-          <button className="btn btn-default" onClick={faster}>
+          </button> */}
+          <select name="speeds" id="speeds" onChange={setSpeed} className="btn">
+            <option value="550">Slow</option>
+            <option value="200" selected="selected">
+              Normal
+            </option>
+            <option value="0">Fast</option>
+          </select>
+          {/* <button className="btn btn-default" onClick={faster}>
             Faster
-          </button>
+          </button> */}
           <button type="button" className="btn btn-danger" onClick={clear}>
             Clear
-          </button>
-          <button className="btn btn-default" onClick={seed}>
-            Seed
           </button>
         </ButtonToolbar>
       </div>
@@ -79,9 +101,11 @@ class Main extends Component {
   constructor(props) {
     super(props);
 
-    this.speed = 50;
+    this.speed = 200;
     this.rows = 30;
-    this.cols = 50;
+    this.cols = 70;
+    // this.rows = 30;
+    // this.cols = 50;
 
     this.state = {
       generation: 0,
@@ -93,13 +117,13 @@ class Main extends Component {
   }
 
   selectBox = (row, col) => {
-    if (!this.state.playing) {
-      let gridCopy = JSON.parse(JSON.stringify(this.state.gridFull));
-      gridCopy[row][col] = !gridCopy[row][col];
-      this.setState({
-        gridFull: gridCopy,
-      });
-    }
+    // if (!this.state.playing) {
+    let gridCopy = JSON.parse(JSON.stringify(this.state.gridFull));
+    gridCopy[row][col] = !gridCopy[row][col];
+    this.setState({
+      gridFull: gridCopy,
+    });
+    // }
   };
 
   seed = () => {
@@ -128,12 +152,17 @@ class Main extends Component {
   };
 
   slower = () => {
-    this.speed = this.speed + 50;
+    this.speed += 50;
     this.playButton();
   };
 
   faster = () => {
-    this.speed = this.speed - 50;
+    this.speed -= 50;
+    this.playButton();
+  };
+
+  setSpeed = () => {
+    this.speed = parseInt(document.querySelector("[name=speeds]").value);
     this.playButton();
   };
 
@@ -177,7 +206,7 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <h1>Game of Life</h1>
+        <h1>Conway's Game of Life</h1>
         <Buttons
           playButton={this.playButton}
           pauseButton={this.pauseButton}
@@ -186,14 +215,16 @@ class Main extends Component {
           clear={this.clear}
           seed={this.seed}
           gridSize={this.gridSize}
+          playing={this.state.playing}
+          setSpeed={this.setSpeed}
         />
+        <h2>Generations: {this.state.generation}</h2>
         <Grid
           gridFull={this.state.gridFull}
           rows={this.rows}
           cols={this.cols}
           selectBox={this.selectBox}
         />
-        <h2>Generations: {this.state.generation}</h2>
       </div>
     );
   }
